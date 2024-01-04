@@ -1,13 +1,12 @@
 import mysql.connector
 
-def get_all_products():
-    conn = mysql.connector.connect(user = 'root', password = '123456Pw!',
-                                    host = 'localhost',
-                                    database = 'GS_app')
+def get_all_products(connection):
 
-    cursor = conn.cursor()
 
-    query = ('SELECT Product.product_id, Product.product_name, Product.uom_id, Product.price_per_unit, uom.uom_name FROM Product INNER JOIN uom ON Product.uom_id = uom.uom_id;')
+    cursor = connection.cursor()
+
+    query = ("SELECT Product.product_id, Product.product_name, Product.uom_id, Product.price_per_unit, uom.uom_name "
+             "FROM Product INNER JOIN uom ON Product.uom_id = uom.uom_id;")
     cursor.execute(query)
     
     response = []
@@ -19,8 +18,9 @@ def get_all_products():
             'price_per_unit': price_per_unit,
             'uom_name': uom_name
         })
-    conn.close()
+
     return response
 
 if __name__ == '__main__':
-    print(get_all_products())
+    connection = 
+    print(get_all_products(connection))
